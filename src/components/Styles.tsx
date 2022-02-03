@@ -30,7 +30,7 @@ export const Styles = () => {
           border-radius: 4px;
           text-transform: capitalize;
         }
-        .pr-state-opened {
+        .pr-state-active {
           color: var(--theme-green-text);
           background-color: var(--theme-green-background);
         }
@@ -38,11 +38,11 @@ export const Styles = () => {
           color: #463159;
           background-color: #e5dced;
         }
-        .pr-state-closed {
+        .pr-state-abandoned {
           color: var(--theme-red-text);
           background-color: var(--theme-red-background);
         }
-        .pr-state-draft {
+        .pr-state-notSet {
           color: #0b0b0b;
           background-color: #b8c0c9;
         }

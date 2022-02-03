@@ -11,15 +11,11 @@ aha.on('addLink', async ({ record, context }) => {
   const prUrl = await aha.commandPrompt('Link URL', {
     placeholder: 'Enter the URL to a pull request'
   });
-
-  const auth = aha.auth('ado', {});
-  console.log('~~~~~', auth);
-  // await adClient.auth();
-  // const res = await adClient.getPRByURL(prUrl);
-  // console.log('=====', res);
-  // if (res) {
-  //   await linkPullRequestToRecord(res, record);
-  // } else {
-  //   throw new Error('Could not link this pull request! Please enter a valid pull request URL!');
-  // }
+  await adClient.auth();
+  const res = await adClient.getPRByURL(prUrl);
+  if (res) {
+    await linkPullRequestToRecord(res, record);
+  } else {
+    throw new Error('Could not link this pull request! Please enter a valid pull request URL!');
+  }
 });

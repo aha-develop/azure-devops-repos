@@ -70,7 +70,6 @@ class ADClient {
     const { data } = await axiosIns.get(
       `${organization}/${project}/_apis/git/repositories/${repositoryId}/pullrequests/${pullRequestId}?api-version=4.1`
     );
-    console.log('~~~~ ', data);
 
     return data;
   };
@@ -86,7 +85,7 @@ class ADClient {
   };
 
   private parseURL = (url: string): AzureDevops.PRGetOptions => {
-    if (this.validatePRURL(url)) {
+    if (!this.validatePRURL(url)) {
       throw new Error('Please enter a valid pull request URL');
     }
     const parsedURL = new URL(url).pathname.split('/');

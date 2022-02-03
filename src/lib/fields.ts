@@ -157,8 +157,8 @@ export const linkMergeRequest = async (pr: AzureDevops.PR) => {
     record = await referenceToRecordFromId(pr.mergeId);
   }
 
-  if (!record && pr?.title) {
-    record = await referenceToRecordFromTitle(pr.title ?? '');
+  if (!record && pr?.sourceRefName) {
+    record = await referenceToRecordFromTitle(pr?.sourceRefName?.replace('refs/heads/', '') ?? '');
   }
 
   if (record) {
@@ -263,7 +263,7 @@ export const referenceToRecordFromTitle = async (str: string): Promise<Aha.Recor
     return null;
   }
 
-  return await RecordClass.select('id', 'referenceNum').find(ahaReference.referenceNum);
+  return await RecordClass.select('id', 'referenceNum').find(ahaReference.referenceNum.toUpperCase());
 };
 
 /**
@@ -289,7 +289,7 @@ export const referenceToRecordFromId = async (str: string): Promise<Aha.RecordUn
 /**
  * @param {string} name
  */
-function extractReference(name) {
+export const extractReference = (name: string): { type: string; referenceNum: string } => {
   let matches;
 
   // Requirement
@@ -317,4 +317,4 @@ function extractReference(name) {
   }
 
   return null;
-}
+};

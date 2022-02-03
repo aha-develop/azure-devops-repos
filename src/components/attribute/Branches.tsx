@@ -19,7 +19,7 @@ export const Branch = ({ branch }: BranchProps) => {
       <span className="type-icon">
         <aha-icon icon="fa-regular fa-code-branch type-icon" />
       </span>
-      <ExternalLink href={branch.url}>{branch.name}</ExternalLink>
+      <ExternalLink href={branch.url}>{branch.name.replace('refs/heads/', '')}</ExternalLink>
       <a
         href="#"
         onClick={onCopy}
