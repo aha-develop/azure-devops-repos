@@ -21,13 +21,13 @@ aha.on('webhook', async ({ headers, payload }) => {
 });
 
 const handlePullRequest = async (payload: Webhook.Payload) => {
-  const mr: AzureDevops.PR = payload.resource ?? {};
+  const pr: AzureDevops.PR = payload.resource ?? {};
 
   // Make sure the MR is linked to its record.
-  const record = await linkMergeRequest(mr);
+  const record = await linkMergeRequest(pr);
 
   // Link MR to record
-  await linkPullRequestToRecord(mr, record);
+  await linkPullRequestToRecord(pr, record);
 };
 
 async function handleCreateBranch(payload: Webhook.Payload) {
