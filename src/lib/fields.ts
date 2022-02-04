@@ -146,12 +146,12 @@ export const AzureDevopsPRToPRLink = (pr: AzureDevops.PR): IExtensionFieldPullRe
 };
 
 /**
- * Link Merge Request to Aha Record
+ * Link Pull Request to Aha Record
  *
  * @param PR
  * @returns
  */
-export const linkMergeRequest = async (pr: AzureDevops.PR) => {
+export const linkPullRequest = async (pr: AzureDevops.PR) => {
   let record;
   if (pr?.mergeId) {
     record = await referenceToRecordFromId(pr.mergeId);
@@ -161,15 +161,21 @@ export const linkMergeRequest = async (pr: AzureDevops.PR) => {
     record = await referenceToRecordFromTitle(pr?.sourceRefName?.replace('refs/heads/', '') ?? '');
   }
 
+  if (!record && pr?.title) {
+    record = await referenceToRecordFromTitle(pr?.title ?? '');
+  }
+
   if (record) {
     await linkPullRequestToRecord(pr, record);
+  } else {
+    throw new Error('Could not find record in pull request');
   }
 
   return record;
 };
 
 /**
- * UnLink Merge Request
+ * UnLink Pull Request
  *
  * @param record
  * @param number
@@ -222,6 +228,7 @@ export const getExtensionFields = async (
  * @param record
  */
 export const linkBranchToRecord = async (branchName: string, repoUrl: string, record: Aha.RecordUnion) => {
+  console.log('~~~~~~~~' + branchName.split('/'));
   await appendFieldToRecord(record, 'branches', [
     {
       id: branchName,

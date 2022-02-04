@@ -1,1 +1,1 @@
-export const IDENTIFIER = 'aha-develop.azure-devops-git-view';
+export const IDENTIFIER = 'aha-develop.azure-repos';

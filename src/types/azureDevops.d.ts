@@ -5,41 +5,6 @@ declare namespace AzureDevops {
 
   type MergeStatus = 'conflicts' | 'failure' | 'notSet' | 'queued' | 'rejectedByPolicy' | 'succeeded';
 
-  interface Connections<T> {
-    count?: number;
-    edges?: Edge<T>[];
-    nodes?: T[];
-    pageInfo: PageInfo;
-  }
-
-  interface PageInfo {
-    endCursor?: string;
-    hasNextPage?: boolean;
-    hasPreviousPage?: boolean;
-    startCursor?: string;
-  }
-
-  interface Edge<T> {
-    cursor?: string;
-    node?: T;
-  }
-
-  interface Project {
-    id?: ID;
-    name?: string;
-    webUrl?: string;
-    mergeRequests?: Connections<PR>;
-  }
-
-  interface Label {
-    color?: string;
-    description?: string;
-    descriptionHtml?: string;
-    id?: ID;
-    textColor?: string;
-    title?: string;
-  }
-
   interface PR {
     repository?: Repository;
     pullRequestId?: number;
@@ -53,6 +18,11 @@ declare namespace AzureDevops {
     isDraft?: boolean;
     mergeId?: string;
     url?: string;
+    refUpdates?: Array<{
+      name?: string;
+      newObjectId?: string;
+      oldObjectId?: string;
+    }>;
   }
 
   interface Repository {
@@ -73,20 +43,6 @@ declare namespace AzureDevops {
     sshUrl?: string;
     webUrl?: string;
     isDisabled?: boolean;
-  }
-
-  type MRWithProject = PR & {
-    projectId?: ID;
-    projectName?: string;
-    projectWebUrl?: string;
-  };
-
-  interface User {
-    id: number;
-    name?: string;
-    email?: string;
-    username?: string;
-    avatar_url?: string;
   }
 
   interface PRGetOptions {

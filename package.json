@@ -1,8 +1,8 @@
 {
-  "name": "aha-develop.azure-devops-git-view",
-  "description": "Azure Devops Git View",
+  "name": "aha-develop.azure-repos",
+  "description": "Azure Repos Integration",
   "version": "0.0.0",
-  "author": "@aha-develop/azure-devops-git-view",
+  "author": "Aha! (support@aha.io)",
   "repository": {
     "type": "git",
     "url": "https://github.com/aha-develop/azure-devops-repos"
@@ -31,7 +31,7 @@
     "contributes": {
       "views": {
         "links": {
-          "title": "AzureDevopsGit",
+          "title": "Azure Repos",
           "entryPoint": "src/views/attribute.tsx",
           "host": "attribute",
           "recordTypes": [
@@ -43,21 +43,21 @@
       },
       "commands": {
         "sync": {
-          "title": "AzureDevops: Sync merge requests",
+          "title": "Azure Repos: Sync pull requests",
           "entryPoint": "src/commands/sync.ts"
         },
         "addLink": {
-          "title": "AzureDevops: Link merge request to record",
+          "title": "Azure Repos: Link pull request to record",
           "entryPoint": "src/commands/addLink.ts"
         },
         "removeLinks": {
-          "title": "AzureDevops: Remove linked merge requests from record",
+          "title": "Azure Repos: Remove linked pull requests from record",
           "entryPoint": "src/commands/removeLinks.ts"
         }
       },
       "endpoints": {
         "webhook": {
-          "title": "Webhook from Azure Devops Git",
+          "title": "Webhook from Azure Repos",
           "entryPoint": "src/webhooks/webhook.ts",
           "public": true
         }

@@ -28,8 +28,6 @@ declare namespace Webhook {
     visibility_level?: number;
   }
 
-  type EventType = 'merge_request' | 'note' | 'issue';
-
   interface Project {
     id: number;
     url?: string;

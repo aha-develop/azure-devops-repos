@@ -1,5 +1,7 @@
 import { runCommand } from '@lib/runCommand.js';
-import { linkMergeRequest, linkBranch, referenceToRecordFromTitle, linkPullRequestToRecord } from '../lib/fields.js';
+import { linkPullRequest, linkBranch, referenceToRecordFromTitle, linkPullRequestToRecord } from '../lib/fields.js';
+
+const EMPTY_SHA = '0000000000000000000000000000000000000000';
 
 aha.on('webhook', async ({ headers, payload }) => {
   const event = payload.eventType;
@@ -7,7 +9,7 @@ aha.on('webhook', async ({ headers, payload }) => {
   console.log(`Received webhook '${event}' ${payload.event_type || ''}`);
 
   switch (event) {
-    case 'git.branch.created':
+    case 'git.push':
       await handleCreateBranch(payload);
       break;
     case 'git.pullrequest.created':
@@ -24,20 +26,24 @@ const handlePullRequest = async (payload: Webhook.Payload) => {
   const pr: AzureDevops.PR = payload.resource ?? {};
 
   // Make sure the MR is linked to its record.
-  const record = await linkMergeRequest(pr);
+  const record = await linkPullRequest(pr);
 
   // Link MR to record
   await linkPullRequestToRecord(pr, record);
 };
 
 async function handleCreateBranch(payload: Webhook.Payload) {
-  const branchName = payload?.resource?.sourceRefName?.replace('refs/heads/', '') ?? '';
-  if (!branchName) {
-    return;
-  }
+  const refUpdate = payload.resource.refUpdates?.[0] ?? {};
+  if (refUpdate?.oldObjectId === EMPTY_SHA || refUpdate?.newObjectId === EMPTY_SHA) {
+    const branchName = refUpdate?.name;
+    const repoURL = payload?.resource?.repository?.remoteUrl ?? '';
+    if (!branchName || !repoURL) {
+      return;
+    }
 
-  const record = await linkBranch(branchName, payload?.resource?.repository?.webUrl ?? '');
-  await triggerEvent('branch.create', payload, record);
+    const record = await linkBranch(branchName, repoURL);
+    await triggerEvent('branch.create', payload, record);
+  }
 }
 
 /**
