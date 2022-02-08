@@ -13,13 +13,9 @@
   },
   "dependencies": {
     "@aha-app/aha-develop-react": "^1.0.6",
-    "axios": "^0.25.0",
-    "graphql": "^16.2.0",
-    "graphql-request": "^3.7.0",
-    "lodash": "^4.17.21"
+    "axios": "^0.25.0"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.178",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "prettier": "^2.5.1"

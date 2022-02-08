@@ -6,8 +6,6 @@ const EMPTY_SHA = '0000000000000000000000000000000000000000';
 aha.on('webhook', async ({ headers, payload }) => {
   const event = payload.eventType;
 
-  console.log(`Received webhook '${event}' ${payload.event_type || ''}`);
-
   switch (event) {
     case 'git.push':
       await handleCreateBranch(payload);
@@ -17,7 +15,6 @@ aha.on('webhook', async ({ headers, payload }) => {
       await handlePullRequest(payload);
       break;
     default:
-      console.log(`No action registered for ${event}`);
       break;
   }
 });
