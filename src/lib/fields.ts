@@ -228,7 +228,6 @@ export const getExtensionFields = async (
  * @param record
  */
 export const linkBranchToRecord = async (branchName: string, repoUrl: string, record: Aha.RecordUnion) => {
-  console.log('~~~~~~~~' + branchName.split('/'));
   await appendFieldToRecord(record, 'branches', [
     {
       id: branchName,
@@ -262,7 +261,6 @@ export const referenceToRecordFromTitle = async (str: string): Promise<Aha.Recor
   if (!ahaReference) {
     return null;
   }
-  console.log(`Searching for ${ahaReference.type} ref ${ahaReference.referenceNum}`);
 
   const RecordClass = aha.models[ahaReference.type];
   if (!RecordClass) {
