@@ -17,11 +17,19 @@ The Azure DevOps Repos extension triggers events that other extensions can use f
 
 **Note: In order to install an extension into your Aha! Develop account, you must be an account administrator.**
 
-1. Install the GitLab extension by clicking [here](https://secure.aha.io/settings/account/extensions/install?url=https%3A%2F%2Fsecure.aha.io%2Fextensions%2Faha-develop.azure-devops-repos.gz).
+1. Install the Azure DevOps Repos extension by clicking [here](https://secure.aha.io/settings/account/extensions/install?url=https%3A%2F%2Fsecure.aha.io%2Fextensions%2Faha-develop.azure-devops-repos.gz).
 
-2. Configure a webhook in Azure DevOps Repos. The extension will automatically link Aha! records to branches and pull requests in GitLab if you include the Aha! reference number (like `APP-123`) in the name of the branch or pull request. To enable this:
+2. Configure a webhook in Azure DevOps Repos. The extension will automatically link Aha! records to branches and pull requests in Azure DevOps if you include the Aha! reference number (like `APP-123`) in the name of the branch or pull request. To enable this:
 
-  <UPDATE>
+    1. In Aha! Develop, go to Settings -> Account -> Extensions -> Azure Repos Integration -> Webhook from Azure Repos. Copy the hidden URL.
+    2. In Azure DevOps, go to the project you want to integrate with Aha! Develop. Visit Project settings > Service hooks.
+    3. Create subscriptions for the following events:
+        * Web Hooks - Code pushed
+        * Web Hooks - Pull request created
+        * Web Hooks - Pull request updated
+    4. Set the URL field to the value copied in the first step.
+
+
   
 ## Working on the extension
 
