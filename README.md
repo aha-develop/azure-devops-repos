@@ -12,7 +12,10 @@ It provides these contributions:
 The Azure DevOps Repos extension triggers events that other extensions can use for automation. For example, an extension can listen for the label event:
 
 ```js
-<INSERT>
+aha.on({ event: 'aha-develop.azure-devops-repos.pr.updated' }, async ({ record, payload }) => {
+  record.teamWorkflowStatus = { name: 'In code review' };
+  await record.save();
+});
 ```
 
 ## Installing the extension
