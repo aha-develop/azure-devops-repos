@@ -27,6 +27,7 @@ const handlePullRequest = async (payload: Webhook.Payload) => {
 
   // Link MR to record
   await linkPullRequestToRecord(pr, record);
+  await triggerEvent('pr.update', payload, record);
 };
 
 async function handleCreateBranch(payload: Webhook.Payload) {
@@ -57,7 +58,7 @@ const triggerEvent = async (event: string, payload: any, referenceText) => {
     record = await referenceToRecordFromTitle(referenceText);
   }
 
-  aha.triggerServer(`aha-develop.gitlab.${event}`, {
+  aha.triggerServer(`aha-develop.azure-devops-repos.${event}`, {
     record,
     payload
   });

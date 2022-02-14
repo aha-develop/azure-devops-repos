@@ -7,21 +7,34 @@ It provides these contributions:
 - `Links attribute` - Link Aha! Develop records to Azure Devops Repos branches and pull requests. See the status checks and approvals for the PR.
 - `Webhook` - Automatically links pull requests to records if the PR title starts with the record reference number.
 
+![Example screenshot](res/demo.png)
+
 The Azure DevOps Repos extension triggers events that other extensions can use for automation. For example, an extension can listen for the label event:
 
 ```js
-<INSERT>
+aha.on({ event: 'aha-develop.azure-devops-repos.pr.update' }, async ({ record, payload }) => {
+  record.teamWorkflowStatus = { name: 'In code review' };
+  await record.save();
+});
 ```
 
 ## Installing the extension
 
 **Note: In order to install an extension into your Aha! Develop account, you must be an account administrator.**
 
-1. Install the GitLab extension by clicking [here](https://secure.aha.io/settings/account/extensions/install?url=https%3A%2F%2Fsecure.aha.io%2Fextensions%2Faha-develop.azure-devops-repos.gz).
+1. Install the Azure DevOps Repos extension by clicking [here](https://secure.aha.io/settings/account/extensions/install?url=https%3A%2F%2Fsecure.aha.io%2Fextensions%2Faha-develop.azure-devops-repos.gz).
 
-2. Configure a webhook in Azure DevOps Repos. The extension will automatically link Aha! records to branches and pull requests in GitLab if you include the Aha! reference number (like `APP-123`) in the name of the branch or pull request. To enable this:
+2. Configure a webhook in Azure DevOps Repos. The extension will automatically link Aha! records to branches and pull requests in Azure DevOps if you include the Aha! reference number (like `APP-123`) in the name of the branch or pull request. To enable this:
 
-  <UPDATE>
+    1. In Aha! Develop, go to Settings -> Account -> Extensions -> Azure Repos Integration -> Webhook from Azure Repos. Copy the hidden URL.
+    2. In Azure DevOps, go to the project you want to integrate with Aha! Develop. Visit Project settings > Service hooks.
+    3. Create subscriptions for the following events:
+        * Web Hooks - Code pushed
+        * Web Hooks - Pull request created
+        * Web Hooks - Pull request updated
+    4. Set the URL field to the value copied in the first step.
+
+![Azure DevOps setup](res/webhook-setup.png)
   
 ## Working on the extension
 
