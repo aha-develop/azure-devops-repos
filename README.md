@@ -7,6 +7,8 @@ It provides these contributions:
 - `Links attribute` - Link Aha! Develop records to Azure Devops Repos branches and pull requests. See the status checks and approvals for the PR.
 - `Webhook` - Automatically links pull requests to records if the PR title starts with the record reference number.
 
+![Example screenshot](res/demo.png)
+
 The Azure DevOps Repos extension triggers events that other extensions can use for automation. For example, an extension can listen for the label event:
 
 ```js
@@ -29,7 +31,7 @@ The Azure DevOps Repos extension triggers events that other extensions can use f
         * Web Hooks - Pull request updated
     4. Set the URL field to the value copied in the first step.
 
-
+![Azure DevOps setup](res/webhook-setup.png)
   
 ## Working on the extension
 
