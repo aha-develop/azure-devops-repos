@@ -1,7 +1,7 @@
 {
   "name": "aha-develop.azure-devops-repos",
   "description": "Azure Repos Integration",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Aha! (support@aha.io)",
   "repository": {
     "type": "git",
