@@ -14,13 +14,13 @@ export const Menu = ({ record }: MenuProps) => {
       </aha-button>
       <aha-menu-content>
         <aha-menu-item>
-          <a href="#" onClick={() => runCommand(record, 'sync')}>Resync</a>
+          <aha-button kind="plain" onClick={() => runCommand(record, 'sync')}>Resync</aha-button>
         </aha-menu-item>
         <aha-menu-item>
-          <a href="#" onClick={() => runCommand(record, 'addLink')}>Link pull request</a>
+          <aha-button kind="plain" onClick={() => runCommand(record, 'addLink')}>Link pull request</aha-button>
         </aha-menu-item>
         <aha-menu-item>
-          <a href="#" onClick={() => runCommand(record, 'removeLinks')}>Unlink pull requests</a>
+          <aha-button kind="plain" onClick={() => runCommand(record, 'removeLinks')}>Unlink pull requests</aha-button>
         </aha-menu-item>
       </aha-menu-content>
     </aha-menu>
