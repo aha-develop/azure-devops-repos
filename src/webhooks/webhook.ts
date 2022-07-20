@@ -64,7 +64,7 @@ async function triggerAutomation(payload: Webhook.Payload, record) {
   }
 
   const triggers: Record<string, (payload: Webhook.Payload) => string> = {
-    created: (payload) => (payload.resource.isDraft ? 'draftPROpened' : 'prOpened'),
+    created: (payload) => (payload.resource.isDraft ? 'draftPrOpened' : 'prOpened'),
     updated: (payload) => {
       // Use the payload message to interpret the event
       // This doesn't feel particularly future-proof, but the API
