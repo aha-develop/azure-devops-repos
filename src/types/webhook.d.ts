@@ -45,20 +45,4 @@ declare namespace Webhook {
     default_branch?: string;
     path_with_namespace?: string;
   }
-
-  interface ObjectAttributes {
-    id?: string;
-    iid?: number;
-    url?: string;
-    state?: AzureDevops.PullRequestStatus;
-    title?: string;
-    source?: Project;
-    target?: Project;
-    state_id?: number;
-    author_id?: number;
-    description?: string;
-    merge_status: AzureDevops.MergeStatus;
-    source_branch?: string;
-    target_branch?: string;
-  }
 }

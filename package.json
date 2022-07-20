@@ -1,6 +1,6 @@
 {
   "name": "aha-develop.azure-devops-repos",
-  "description": "Azure Repos Integration",
+  "description": "Azure Repos",
   "version": "1.0.1",
   "author": "Aha! (support@aha.io)",
   "repository": {
@@ -56,6 +56,29 @@
           "title": "Webhook from Azure Repos",
           "entryPoint": "src/webhooks/webhook.ts",
           "public": true
+        }
+      },
+      "automationTriggers": {
+        "draftPrOpened": {
+          "title": "Draft PR opened"
+        },
+        "prOpened": {
+          "title": "PR opened"
+        },
+        "prMerged": {
+          "title": "PR merged"
+        },
+        "prClosed": {
+          "title": "PR closed"
+        },
+        "prReopened": {
+          "title": "PR reopened"
+        },
+        "prApproved": {
+          "title": "PR approved"
+        },
+        "prChangesRequested": {
+          "title": "PR changes requested"
         }
       }
     }
