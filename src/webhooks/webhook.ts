@@ -85,6 +85,9 @@ async function triggerAutomation(payload: Webhook.Payload, record) {
       if (message.includes('published the pull request')) {
         return 'prOpened';
       }
+      if (message.includes('completed pull request')) {
+        return 'prMerged';
+      }
       if (message.includes('abandoned pull request')) {
         return 'prClosed';
       }
@@ -95,8 +98,7 @@ async function triggerAutomation(payload: Webhook.Payload, record) {
     merged: (payload) => 'prMerged'
   };
 
-  const action = payload.eventType.replace('git.pullrequest', '');
-  console.log(action);
+  const action = payload.eventType.replace('git.pullrequest.', '');
   const trigger = (triggers[action] || (() => null))(payload);
   if (!trigger) return;
 
