@@ -13,7 +13,6 @@ aha.on('webhook', async ({ headers, payload }) => {
       break;
     case 'git.pullrequest.created':
     case 'git.pullrequest.updated':
-    case 'git.pullrequest.merged':
       await handlePullRequest(payload);
       break;
     default:
@@ -80,7 +79,7 @@ async function triggerAutomation(payload: Webhook.Payload, record) {
         return 'prChangesRequested';
       }
       if (message.includes('marked the pull request as a draft')) {
-        return 'draftPROpened';
+        return 'draftPrOpened';
       }
       if (message.includes('published the pull request')) {
         return 'prOpened';
@@ -94,15 +93,11 @@ async function triggerAutomation(payload: Webhook.Payload, record) {
       if (message.includes('reactivated pull request')) {
         return 'prReopened';
       }
-    },
-    merged: (payload) => 'prMerged'
+    }
   };
 
   const action = payload.eventType.replace('git.pullrequest.', '');
   const trigger = (triggers[action] || (() => null))(payload);
-  if (!trigger) return;
-
-  console.log(`Triggering ${trigger} automation on ${record.referenceNumber}`);
 
   if (trigger) {
     await aha.triggerAutomationOn(record, [IDENTIFIER, trigger].join('.'), true);
