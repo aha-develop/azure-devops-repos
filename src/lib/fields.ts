@@ -157,12 +157,12 @@ export const linkPullRequest = async (pr: AzureDevops.PR) => {
     record = await referenceToRecordFromId(pr.mergeId);
   }
 
-  if (!record && pr?.sourceRefName) {
-    record = await referenceToRecordFromTitle(pr?.sourceRefName?.replace('refs/heads/', '') ?? '');
-  }
-
   if (!record && pr?.title) {
     record = await referenceToRecordFromTitle(pr?.title ?? '');
+  }
+
+  if (!record && pr?.sourceRefName) {
+    record = await referenceToRecordFromTitle(pr?.sourceRefName?.replace('refs/heads/', '') ?? '');
   }
 
   if (record) {
