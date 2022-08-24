@@ -44,12 +44,20 @@ export const Attribute = ({ fields, record }: AttributeProps, { identifier, sett
         <aha-flex align-items="center" justify-content="space-between" gap="5px">
           {authError}
           <Branches branches={branches ?? []} />
-          <aha-button-group>
-            <aha-button size="mini" onClick={(e) => onCopy(record.referenceNum)}>
-              {copied ? 'Copied!' : 'Copy ID'}
-            </aha-button>
-            <Menu record={record} />
-          </aha-button-group>
+          <div
+            style={{
+              flexGrow: 1,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end'
+            }}>
+            <aha-button-group>
+              <aha-button size="mini" onClick={(e) => onCopy(record.referenceNum)}>
+                {copied ? 'Copied!' : 'Copy ID'}
+              </aha-button>
+              <Menu record={record} />
+            </aha-button-group>
+          </div>
         </aha-flex>
         <aha-flex align-items="center" justify-content="space-between" gap="5px">
           <aha-flex direction="column" gap="8px" justify-content="space-between">
