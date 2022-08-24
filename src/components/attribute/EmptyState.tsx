@@ -1,8 +1,11 @@
 import { useClipboard } from '@aha-app/aha-develop-react';
 import adClient from '@lib/azureDevopsClient';
-import { ICON, IDENTIFIER, LEARN_MORE_URL } from '@lib/extension';
+import { IDENTIFIER } from '@lib/extension';
 import { linkPullRequestToRecord } from '@lib/fields';
 import React, { useEffect, useState } from 'react';
+
+const LEARN_MORE_URL = 'https://github.com/aha-develop/azure-devops-repos';
+const ICON = aha.iconForExtensionIdentifier(IDENTIFIER);
 
 type MenuProps = {
   record: Aha.ApplicationModel;
