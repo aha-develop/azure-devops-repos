@@ -39,7 +39,7 @@ class ADClient {
    * @returns
    */
   auth = async (callBack: (token: string) => any = (token) => {}) => {
-    const authData = await aha.auth('ado', { useCachedRetry: false });
+    const authData = await aha.auth('ado', { useCachedRetry: true });
     this.setToken(authData.token);
     return await callBack(authData.token);
   };
@@ -84,18 +84,28 @@ class ADClient {
     console.log(`[Error in AzureDevops API Call] => `, msg, error);
   };
 
-  private parseURL = (url: string): AzureDevops.PRGetOptions => {
-    if (!this.validatePRURL(url)) {
+  private parseURL(urlString: string): AzureDevops.PRGetOptions {
+    if (!this.validatePRURL(urlString)) {
       throw new Error('Please enter a valid pull request URL');
     }
-    const parsedURL = new URL(url).pathname.split('/');
-    return {
-      organization: parsedURL[1],
-      project: parsedURL[2],
-      repositoryId: parsedURL[4],
-      pullRequestId: parsedURL[6]
-    };
-  };
+    const url = new URL(urlString);
+    const parts = url.pathname.split('/');
+    if (url.hostname.endsWith('.visualstudio.com')) {
+      return {
+        organization: url.hostname.split('.')[0],
+        project: parts[1],
+        repositoryId: parts[3],
+        pullRequestId: parts[5]
+      };
+    } else {
+      return {
+        organization: parts[1],
+        project: parts[2],
+        repositoryId: parts[4],
+        pullRequestId: parts[6]
+      };
+    }
+  }
 
   /**
    * Validate PR URL
@@ -103,12 +113,12 @@ class ADClient {
    * @param urlString
    * @returns
    */
-  validatePRURL = (urlString: string) => {
+  validatePRURL(urlString: string): boolean {
     const url = new URL(urlString);
-    return (
-      url.origin === 'https://dev.azure.com' && url.pathname.match(/\/[^\/]+\/[^\/]+\/_git\/[^\/]+\/pullrequest\/\d+/)
-    );
-  };
+    if (!url.protocol.startsWith('https')) return false;
+    if (url.hostname !== 'dev.azure.com' && !url.hostname.endsWith('.visualstudio.com')) return false;
+    return /\/[^\/]+\/_git\/[^\/]+\/pullrequest\/\d+/.test(url.pathname);
+  }
 }
 
 export default ADClient.create();
