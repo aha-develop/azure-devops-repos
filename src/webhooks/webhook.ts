@@ -7,6 +7,9 @@ const EMPTY_SHA = '0000000000000000000000000000000000000000';
 aha.on('webhook', async ({ headers, payload }) => {
   const event = payload.eventType;
 
+  // Flag the account as having successfully set up the webhook
+  aha.account.setExtensionField(IDENTIFIER, 'webhookConfigured', true);
+
   switch (event) {
     case 'git.push':
       await handleCreateBranch(payload);
