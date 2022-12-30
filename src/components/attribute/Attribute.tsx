@@ -1,4 +1,4 @@
-import { useAuth, useClipboard } from '@aha-app/aha-develop-react';
+import { useAuth, useClipboard } from '@aha-develop/aha-develop-react';
 import React from 'react';
 
 import { getExtensionFields } from '@lib/fields';

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuthProvider } from '@aha-app/aha-develop-react';
+import { AuthProvider } from '@aha-develop/aha-develop-react';
 
 import { Styles } from './Styles';
 
