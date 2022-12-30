@@ -53,7 +53,7 @@ export const Attribute = ({ fields, record }: AttributeProps, { identifier, sett
             }}
           >
             <aha-button-group>
-              <aha-button size="mini" onClick={(e) => onCopy(record.referenceNum)}>
+              <aha-button kind="secondary" size="mini" onClick={(e) => onCopy(record.referenceNum)}>
                 {copied ? 'Copied!' : 'Copy ID'}
               </aha-button>
               <Menu record={record} />
