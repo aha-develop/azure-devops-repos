@@ -50,7 +50,8 @@ export const Attribute = ({ fields, record }: AttributeProps, { identifier, sett
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'flex-end'
-            }}>
+            }}
+          >
             <aha-button-group>
               <aha-button size="mini" onClick={(e) => onCopy(record.referenceNum)}>
                 {copied ? 'Copied!' : 'Copy ID'}

@@ -25,7 +25,8 @@ export const Branch = ({ branch }: BranchProps) => {
         onClick={onCopy}
         style={{
           color: copied ? 'var(--aha-green-600)' : ''
-        }}>
+        }}
+      >
         <aha-icon icon={'fa-regular fa-' + (copied ? 'check' : 'clipboard')}></aha-icon>
       </a>
     </aha-flex>
