@@ -1,4 +1,4 @@
-import { useAuth, useClipboard } from '@aha-app/aha-develop-react';
+import { useAuth, useClipboard } from '@aha-develop/aha-develop-react';
 import React from 'react';
 
 import { getExtensionFields } from '@lib/fields';
@@ -50,9 +50,10 @@ export const Attribute = ({ fields, record }: AttributeProps, { identifier, sett
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'flex-end'
-            }}>
+            }}
+          >
             <aha-button-group>
-              <aha-button size="mini" onClick={(e) => onCopy(record.referenceNum)}>
+              <aha-button kind="secondary" size="mini" onClick={(e) => onCopy(record.referenceNum)}>
                 {copied ? 'Copied!' : 'Copy ID'}
               </aha-button>
               <Menu record={record} />

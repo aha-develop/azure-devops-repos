@@ -1,4 +1,4 @@
-import { useClipboard } from '@aha-app/aha-develop-react';
+import { useClipboard } from '@aha-develop/aha-develop-react';
 import adClient from '@lib/azureDevopsClient';
 import { IDENTIFIER } from '@lib/extension';
 import { linkPullRequestToRecord } from '@lib/fields';

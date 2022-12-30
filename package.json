@@ -12,7 +12,7 @@
     "format": "prettier --write 'src/**/*.ts'"
   },
   "dependencies": {
-    "@aha-app/aha-develop-react": "^1.0.6",
+    "@aha-develop/aha-develop-react": "^1.4.1",
     "axios": "^0.25.0"
   },
   "devDependencies": {
