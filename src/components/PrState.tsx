@@ -1,6 +1,5 @@
 import React from 'react';
-// @ts-ignore
-import { titleize } from 'https://cdn.skypack.dev/inflected';
+import { titleize } from 'inflected';
 
 const icon = (state: AzureDevops.PullRequestStatus) => {
   switch (state) {
